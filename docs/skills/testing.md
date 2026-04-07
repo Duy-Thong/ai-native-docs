@@ -1,4 +1,4 @@
-﻿# Skills Kiểm thử (Testing)
+# Skills Kiểm thử (Testing)
 
 Nhóm skills tạo, fix, và review test cases kiểm thử chức năng (**document** workspace), và review UI trực quan (**ecn-fe**).
 

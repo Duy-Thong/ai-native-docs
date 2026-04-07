@@ -1,4 +1,4 @@
-﻿# Skills Review
+# Skills Review
 
 Nhóm skills review code MR, so sánh code với spec, và phản hồi AI review comments cho **ecn-be** (Node.js) và **ecn-fe** (Flutter).
 

@@ -1,4 +1,4 @@
-﻿# Cài đặt
+# Cài đặt
 
 Hướng dẫn clone 3 repo của ecn và thiết lập VS Code Workspace để nhận toàn bộ agent & skill từ cả 3 repo.
 

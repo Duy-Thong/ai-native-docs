@@ -1,4 +1,4 @@
-﻿# Quy trình Handoff
+# Quy trình Handoff
 
 Quy trình bàn giao output giữa Dev, Tester và Lead. Đảm bảo thông tin đầy đủ trước khi chuyển phase.
 

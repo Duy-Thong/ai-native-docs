@@ -1,4 +1,4 @@
-﻿# Review Merge Request bằng AI
+# Review Merge Request bằng AI
 
 ## Tình huống
 

@@ -1,4 +1,4 @@
-﻿# Danh mục Skills
+# Danh mục Skills
 
 39 skills trong `.github/skills/` của 3 workspace folders. Gọi bằng tên skill trong chat với Copilot.
 

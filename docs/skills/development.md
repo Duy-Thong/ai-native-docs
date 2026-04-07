@@ -1,4 +1,4 @@
-﻿# Skills Phát triển (Development)
+# Skills Phát triển (Development)
 
 Nhóm skills sinh code, debug, và tạo MR description cho **ecn-be** (Node.js/Lambda) và **ecn-fe** (Flutter/Dart).
 

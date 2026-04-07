@@ -1,4 +1,4 @@
-﻿# Gen Merge Request Description
+# Gen Merge Request Description
 
 ## Tình huống
 

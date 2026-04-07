@@ -1,4 +1,4 @@
-﻿# Skills Tiện ích (Utilities)
+# Skills Tiện ích (Utilities)
 
 Nhóm skills phụ trợ: chuyển đổi tài liệu, trích xuất schema, đọc file lớn, xác minh, và quản lý skills.
 
