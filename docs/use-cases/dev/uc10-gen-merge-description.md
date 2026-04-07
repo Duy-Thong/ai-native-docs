@@ -1,4 +1,4 @@
-# Gen Merge Request Description
+﻿# Gen Merge Request Description
 
 ## Tình huống
 
@@ -17,10 +17,10 @@ Dev code xong, đã push branch và tạo PR/MR trên GitHub. Cần AI gen nội
 
 ```bash
 # Gen từ PR URL
-/gen-merge https://github.com/org/econy-fe/pull/42
+/gen-merge https://github.com/org/ecn-fe/pull/42
 
 # Gen từ PR URL backend
-/gen-merge https://github.com/org/econy-be/pull/15
+/gen-merge https://github.com/org/ecn-be/pull/15
 ```
 
 ## Output AI gen

@@ -1,4 +1,4 @@
-# Quy trình Handoff
+﻿# Quy trình Handoff
 
 Quy trình bàn giao output giữa Dev, Tester và Lead. Đảm bảo thông tin đầy đủ trước khi chuyển phase.
 
@@ -31,7 +31,7 @@ Format comment chuẩn:
 ```
 【Dev hoàn thành】
 
-■ Branch: feat/ECONY-XXX-feature-name
+■ Branch: feat/ECN-XXX-feature-name
 ■ Design: plans/Sprint-XX/{ticket}/08-detailed-design.md
 ■ Impact Report: plans/Sprint-XX/{ticket}/13-impact-report.md
 ■ Self-check:
@@ -85,7 +85,7 @@ Trước khi bắt đầu tạo/update test case, tester PHẢI kiểm tra:
 ```
 【Nộp Lead review】
 
-■ Ticket: ECONY-XXX
+■ Ticket: ECN-XXX
 ■ Milestone: [Estimate / Design / Code Review / Delivery]
 ■ Output: [đường dẫn file hoặc link]
 ■ Trạng thái: Chờ Lead review
@@ -106,7 +106,7 @@ Trước khi bắt đầu tạo/update test case, tester PHẢI kiểm tra:
 ```
 【Tester nộp output】
 
-■ Ticket: ECONY-XXX
+■ Ticket: ECN-XXX
 ■ Output: [Test cases / Test results]
 ■ File Excel: plans/Sprint-XX/{ticket}/{ticket-id}.xlsx
 ■ Trạng thái: Chờ Lead review

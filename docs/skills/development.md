@@ -1,16 +1,16 @@
-# Skills Phát triển (Development)
+﻿# Skills Phát triển (Development)
 
-Nhóm skills sinh code, debug, và tạo MR description cho **econy-be** (Node.js/Lambda) và **econy-fe** (Flutter/Dart).
+Nhóm skills sinh code, debug, và tạo MR description cho **ecn-be** (Node.js/Lambda) và **ecn-fe** (Flutter/Dart).
 
-## econy-be (Node.js / AWS Lambda)
+## ecn-be (Node.js / AWS Lambda)
 
 ## `nodejs-code-gen`
 
-Sinh code Node.js/Express cho econy-be theo pattern Controller-Service-Repository trên AWS Lambda. Tạo API endpoint, Lambda function, Input/Output DTO, logic service, Joi validation, DynamoDB/Firestore repository, hoặc domain mới.
+Sinh code Node.js/Express cho ecn-be theo pattern Controller-Service-Repository trên AWS Lambda. Tạo API endpoint, Lambda function, Input/Output DTO, logic service, Joi validation, DynamoDB/Firestore repository, hoặc domain mới.
 
 | | |
 |--|--|
-| Workspace | econy-be |
+| Workspace | ecn-be |
 | Input | Mô tả tính năng hoặc API cần tạo |
 | Output | Source code theo pattern Controller-Service-Repository |
 
@@ -24,7 +24,7 @@ Triển khai code Node.js/Express API từ tài liệu thiết kế Markdown. Đ
 
 | | |
 |--|--|
-| Workspace | econy-be |
+| Workspace | ecn-be |
 | Input | File thiết kế chi tiết API (.md) |
 | Output | Source code đầy đủ theo spec |
 
@@ -32,11 +32,11 @@ Triển khai code Node.js/Express API từ tài liệu thiết kế Markdown. Đ
 
 ## `nodejs-debug-fix`
 
-Điều tra và sửa lỗi trong dự án Node.js/Express econy-be. Truy vết qua các tầng: Route → Controller → Service → Repository → DB/API bên ngoài. Sử dụng phân tích nguyên nhân gốc 5-Why, áp dụng sửa lỗi tối thiểu an toàn, kiểm tra bug tương tự. Không dùng cho phát triển tính năng mới hoặc review MR.
+Điều tra và sửa lỗi trong dự án Node.js/Express ecn-be. Truy vết qua các tầng: Route → Controller → Service → Repository → DB/API bên ngoài. Sử dụng phân tích nguyên nhân gốc 5-Why, áp dụng sửa lỗi tối thiểu an toàn, kiểm tra bug tương tự. Không dùng cho phát triển tính năng mới hoặc review MR.
 
 | | |
 |--|--|
-| Workspace | econy-be |
+| Workspace | ecn-be |
 | Input | Mô tả lỗi, error log, hoặc bug description |
 | Output | Code fix đã xác minh |
 
@@ -44,25 +44,25 @@ Triển khai code Node.js/Express API từ tài liệu thiết kế Markdown. Đ
 
 ## `nodejs-mr-description`
 
-Tạo mô tả MR (JP + VN) cho dự án econy-be. Phân tích git diff → tạo báo cáo song ngữ 7 phần: Nguyên nhân trực tiếp, Nguyên nhân gốc, Giải pháp, Kiểm tra tương tự, Kiểm tra ảnh hưởng, Testcase. Không dùng cho: code review, phát triển tính năng, debug.
+Tạo mô tả MR (JP + VN) cho dự án ecn-be. Phân tích git diff → tạo báo cáo song ngữ 7 phần: Nguyên nhân trực tiếp, Nguyên nhân gốc, Giải pháp, Kiểm tra tương tự, Kiểm tra ảnh hưởng, Testcase. Không dùng cho: code review, phát triển tính năng, debug.
 
 | | |
 |--|--|
-| Workspace | econy-be |
+| Workspace | ecn-be |
 | Input | Branch source + target (hoặc commit SHA) |
 | Output | `reports/mr-description-*.md` |
 
 ---
 
-## econy-fe (Flutter / Dart)
+## ecn-fe (Flutter / Dart)
 
 ## `flutter-code-gen`
 
-Sinh code Flutter theo Clean Architecture + MobX + GetX cho econy-fe. Tạo Screen, ViewModel, UseCase, Repository, Model, hoặc domain mới.
+Sinh code Flutter theo Clean Architecture + MobX + GetX cho ecn-fe. Tạo Screen, ViewModel, UseCase, Repository, Model, hoặc domain mới.
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | Mô tả tính năng hoặc màn hình cần tạo |
 | Output | Source code theo Clean Architecture |
 
@@ -74,7 +74,7 @@ Sinh code Flutter từ tài liệu thiết kế chi tiết màn hình. Đọc sp
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | File thiết kế chi tiết màn hình (.md hoặc .xlsx) |
 | Output | Source code màn hình đầy đủ theo spec |
 
@@ -82,11 +82,11 @@ Sinh code Flutter từ tài liệu thiết kế chi tiết màn hình. Đọc sp
 
 ## `flutter-debug-fix`
 
-Điều tra và sửa lỗi trong dự án Flutter econy-fe. Truy vết qua các lớp: View → ViewModel → UseCase → Repository → API/Firestore. Áp dụng 5-Why, sửa tối thiểu an toàn.
+Điều tra và sửa lỗi trong dự án Flutter ecn-fe. Truy vết qua các lớp: View → ViewModel → UseCase → Repository → API/Firestore. Áp dụng 5-Why, sửa tối thiểu an toàn.
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | Mô tả lỗi, stack trace, hoặc bug description |
 | Output | Code fix đã xác minh |
 
@@ -98,7 +98,7 @@ Tạo mô tả MR Flutter song ngữ JP+VN. Phân tích git diff → sinh báo c
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | Branch source + target (hoặc commit SHA) |
 | Output | `reports/mr-description-*.md` |
 
@@ -110,6 +110,6 @@ Phát triển React Native, Flutter, hoặc native mobile apps với các archit
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | Yêu cầu tính năng mobile |
 | Output | Code implementation đầy đủ |

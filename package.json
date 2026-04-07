@@ -1,7 +1,7 @@
-{
-  "name": "econy-docs",
+﻿{
+  "name": "ecn-docs",
   "version": "1.0.0",
-  "description": "AI Native Workflow documentation for econy project",
+  "description": "AI Native Workflow documentation for ecn project",
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",

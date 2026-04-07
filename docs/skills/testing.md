@@ -1,6 +1,6 @@
-# Skills Kiểm thử (Testing)
+﻿# Skills Kiểm thử (Testing)
 
-Nhóm skills tạo, fix, và review test cases kiểm thử chức năng (**document** workspace), và review UI trực quan (**econy-fe**).
+Nhóm skills tạo, fix, và review test cases kiểm thử chức năng (**document** workspace), và review UI trực quan (**ecn-fe**).
 
 ## `testcase-functional-creator`
 
@@ -44,6 +44,6 @@ So sánh UI thực tế với thiết kế (Figma/screenshot). Phát hiện sai 
 
 | | |
 |--|--|
-| Workspace | econy-fe |
+| Workspace | ecn-fe |
 | Input | Screenshot UI thực tế + file thiết kế / Figma |
 | Output | Báo cáo sai lệch UI với severity |

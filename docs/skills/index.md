@@ -1,4 +1,4 @@
-# Danh mục Skills
+﻿# Danh mục Skills
 
 39 skills trong `.github/skills/` của 3 workspace folders. Gọi bằng tên skill trong chat với Copilot.
 
@@ -6,31 +6,31 @@
 
 | Skill | Workspace | Role | Bước | Mô tả |
 |-------|-----------|------|------|-------|
-| nodejs-code-gen | econy-be | Dev | B-12 | Sinh code Node.js/Express theo pattern Controller-Service-Repository |
-| nodejs-code-from-design | econy-be | Dev | B-12 | Triển khai code từ tài liệu thiết kế Markdown |
-| nodejs-debug-fix | econy-be | Dev | Bug-4 | Điều tra và sửa lỗi (5-Why, Route → Controller → Service → DB) |
-| nodejs-code-review | econy-be | Reviewer | B-15 | Review code MR, so sánh branch/commit SHA |
-| nodejs-design-review | econy-be | Reviewer | B-9 | So sánh triển khai API với spec (.md hoặc .xlsx) |
-| nodejs-mr-description | econy-be | Dev | — | Tạo mô tả MR song ngữ JP+VN (7 phần) |
-| nodejs-review-reply | econy-be | Reviewer | — | Xác minh và phản hồi AI review comments |
-| drawio-db-extract | econy-be | Support | — | Trích xuất schema DynamoDB/Firestore từ file .drawio |
-| drawio-firestore-extract | econy-be | Support | — | Trích xuất collection Firestore từ file .drawio |
-| read-file | econy-be | Support | — | Đọc file Markdown lớn (>200 dòng) không mất ngữ cảnh |
-| verification-before-completion | econy-be/fe | Support | — | Xác minh bằng lệnh thực tế trước khi tuyên bố hoàn thành |
-| convert-excel-to-md | econy-be/fe | Support | — | Chuyển đổi file Excel (.xlsx) sang Markdown tối ưu cho AI |
-| skill-creator | econy-be | Support | — | Tạo mới, chỉnh sửa, benchmark skill |
-| flutter-code-gen | econy-fe | Dev | B-12 | Sinh code Flutter theo Clean Architecture + MobX |
-| flutter-code-from-design | econy-fe | Dev | B-12 | Sinh code Flutter từ tài liệu thiết kế |
-| flutter-debug-fix | econy-fe | Dev | Bug-4 | Điều tra và sửa lỗi Flutter |
-| flutter-mr-review | econy-fe | Reviewer | B-15 | Review MR Flutter |
-| flutter-design-review | econy-fe | Reviewer | B-9 | So sánh triển khai Flutter với spec |
-| flutter-mr-description | econy-fe | Dev | — | Tạo mô tả MR Flutter song ngữ JP+VN |
-| flutter-review-reply | econy-fe | Reviewer | — | Phản hồi AI review comments cho Flutter |
-| flutter-ui-review | econy-fe | QA | B-17 | So sánh UI vs thiết kế (Figma/screenshot) |
-| mobile-developer | econy-fe | Dev | — | Phát triển React Native / Flutter / native với architecture patterns |
-| clean-code | econy-fe | Support | — | Áp dụng nguyên tắc Clean Code (Robert C. Martin) |
-| translate-document | econy-fe | Support | — | Dịch tài liệu Excel/Word/PPT JP↔VN |
-| xlsx | econy-fe | Support | — | Mở, đọc, sửa, tạo file .xlsx/.csv |
+| nodejs-code-gen | ecn-be | Dev | B-12 | Sinh code Node.js/Express theo pattern Controller-Service-Repository |
+| nodejs-code-from-design | ecn-be | Dev | B-12 | Triển khai code từ tài liệu thiết kế Markdown |
+| nodejs-debug-fix | ecn-be | Dev | Bug-4 | Điều tra và sửa lỗi (5-Why, Route → Controller → Service → DB) |
+| nodejs-code-review | ecn-be | Reviewer | B-15 | Review code MR, so sánh branch/commit SHA |
+| nodejs-design-review | ecn-be | Reviewer | B-9 | So sánh triển khai API với spec (.md hoặc .xlsx) |
+| nodejs-mr-description | ecn-be | Dev | — | Tạo mô tả MR song ngữ JP+VN (7 phần) |
+| nodejs-review-reply | ecn-be | Reviewer | — | Xác minh và phản hồi AI review comments |
+| drawio-db-extract | ecn-be | Support | — | Trích xuất schema DynamoDB/Firestore từ file .drawio |
+| drawio-firestore-extract | ecn-be | Support | — | Trích xuất collection Firestore từ file .drawio |
+| read-file | ecn-be | Support | — | Đọc file Markdown lớn (>200 dòng) không mất ngữ cảnh |
+| verification-before-completion | ecn-be/fe | Support | — | Xác minh bằng lệnh thực tế trước khi tuyên bố hoàn thành |
+| convert-excel-to-md | ecn-be/fe | Support | — | Chuyển đổi file Excel (.xlsx) sang Markdown tối ưu cho AI |
+| skill-creator | ecn-be | Support | — | Tạo mới, chỉnh sửa, benchmark skill |
+| flutter-code-gen | ecn-fe | Dev | B-12 | Sinh code Flutter theo Clean Architecture + MobX |
+| flutter-code-from-design | ecn-fe | Dev | B-12 | Sinh code Flutter từ tài liệu thiết kế |
+| flutter-debug-fix | ecn-fe | Dev | Bug-4 | Điều tra và sửa lỗi Flutter |
+| flutter-mr-review | ecn-fe | Reviewer | B-15 | Review MR Flutter |
+| flutter-design-review | ecn-fe | Reviewer | B-9 | So sánh triển khai Flutter với spec |
+| flutter-mr-description | ecn-fe | Dev | — | Tạo mô tả MR Flutter song ngữ JP+VN |
+| flutter-review-reply | ecn-fe | Reviewer | — | Phản hồi AI review comments cho Flutter |
+| flutter-ui-review | ecn-fe | QA | B-17 | So sánh UI vs thiết kế (Figma/screenshot) |
+| mobile-developer | ecn-fe | Dev | — | Phát triển React Native / Flutter / native với architecture patterns |
+| clean-code | ecn-fe | Support | — | Áp dụng nguyên tắc Clean Code (Robert C. Martin) |
+| translate-document | ecn-fe | Support | — | Dịch tài liệu Excel/Word/PPT JP↔VN |
+| xlsx | ecn-fe | Support | — | Mở, đọc, sửa, tạo file .xlsx/.csv |
 | basic-design-scope-reviewer | document | Reviewer | B-9 | Đánh giá scope thiết kế cơ bản theo checklist |
 | detail-design-api-creator | document | Architect | B-8 | Tạo mới thiết kế chi tiết API (REST GET/POST/PUT/DELETE/PATCH) |
 | detail-design-api-edit | document | Architect | B-8 | Chỉnh sửa/cập nhật thiết kế chi tiết API đã có |

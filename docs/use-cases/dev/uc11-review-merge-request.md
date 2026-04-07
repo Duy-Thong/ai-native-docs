@@ -1,4 +1,4 @@
-# Review Merge Request bằng AI
+﻿# Review Merge Request bằng AI
 
 ## Tình huống
 
@@ -18,10 +18,10 @@ Dev code xong, đã tạo PR trên GitHub. Chạy `/review-mr` để AI review t
 
 ```bash
 # Review 1 PR
-/review-mr https://github.com/org/econy-fe/pull/42
+/review-mr https://github.com/org/ecn-fe/pull/42
 
 # Review với context sprint
-/review-mr https://github.com/org/econy-fe/pull/42 --sprint S10
+/review-mr https://github.com/org/ecn-fe/pull/42 --sprint S10
 ```
 
 ## Phân loại Shiteki A~J
