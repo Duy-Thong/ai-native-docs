@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'AI Native Workflow',
-  description: 'Hướng dẫn sử dụng cho dự án Econy',
+  description: 'Hướng dẫn sử dụng cho dự án econy',
   lang: 'vi-VN',
   themeConfig: {
     logo: '/logo.svg',
@@ -94,7 +94,7 @@ export default defineConfig({
     search: { provider: 'local' },
 
     footer: {
-      message: 'AI Native Workflow — Econy Project',
+      message: 'AI Native Workflow — econy Project',
       copyright: 'Copyright © 2026',
     },
     outline: { label: 'Trên trang này' },

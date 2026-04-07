@@ -1,6 +1,6 @@
 # Cài đặt
 
-Hướng dẫn clone 3 repo của Econy và thiết lập VS Code Workspace để nhận toàn bộ agent & skill từ cả 3 repo.
+Hướng dẫn clone 3 repo của econy và thiết lập VS Code Workspace để nhận toàn bộ agent & skill từ cả 3 repo.
 
 ## Bước 1: Clone 3 repo
 

@@ -2,7 +2,7 @@
 layout: home
 hero:
   name: AI Native Workflow
-  text: Hướng dẫn sử dụng cho dự án Econy
+  text: Hướng dẫn sử dụng cho dự án econy
   tagline: 53 skills · 10 agents · 5 roles · 19-step workflow
   actions:
     - theme: brand
