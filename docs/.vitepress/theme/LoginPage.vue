@@ -3,7 +3,6 @@
     <div class="login-box">
       <div class="login-logo">🤖</div>
       <h2>AI Native Workflow</h2>
-      <p class="subtitle">econy Internal Docs</p>
 
       <form @submit.prevent="handleLogin">
         <div class="field">
@@ -57,11 +56,13 @@ async function handleLogin() {
 
 <style scoped>
 .login-wrapper {
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--vp-c-bg);
+  z-index: 9999;
 }
 
 .login-box {
