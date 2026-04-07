@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrapper">
+  <div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--vp-c-bg,#fff);z-index:9999;">
     <div class="login-box">
       <div class="login-logo">🤖</div>
       <h2>AI Native Workflow</h2>
@@ -55,16 +55,6 @@ async function handleLogin() {
 </script>
 
 <style scoped>
-.login-wrapper {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--vp-c-bg);
-  z-index: 9999;
-}
-
 .login-box {
   width: 360px;
   padding: 40px;
