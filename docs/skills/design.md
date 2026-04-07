@@ -1,114 +1,134 @@
 # Skills Thiết kế (Design)
 
-Nhóm skills hỗ trợ giai đoạn thiết kế hệ thống và ước lượng (Phase A-3 → A-4, B-8).
+Nhóm skills tạo mới, chỉnh sửa, và review tài liệu thiết kế chi tiết (Basic Design, API Design, Screen Design, Task Design). Tất cả thuộc workspace **document**.
 
-## `/design-flow`
+## `basic-design-scope-reviewer`
 
-Thiết kế user flow, data flow, và API sequence bằng Mermaid diagrams.
-
-```
-/design-flow
-/design-flow --type sequence
-```
+Đánh giá scope thiết kế cơ bản (Basic Design) của các task phát triển theo checklist chi tiết. Đảm bảo đầy đủ thành phần, trigger, input/output, integration, error handling. Tạo file báo cáo kết quả review.
 
 | | |
 |--|--|
-| Input | 01-requirement-analysis.md, 02-qa-questions.md (đã answered) |
-| Output | 03-flow-design.md — Mermaid diagrams, flow descriptions |
+| Workspace | document |
+| Input | File scope / Basic Design (.md hoặc .xlsx) |
+| Output | File báo cáo review kết quả |
 
-**Tips**: Dùng `--type sequence` cho API flows, `--type flowchart` cho user flows. Cần QA answers trước khi chạy.
+---
 
-## `/design-detail`
+## `detail-design-api-creator`
 
-Thiết kế chi tiết: screen structure, state management, API contracts, DB/Firestore changes. Tự động tách thành 2 phần: design (non-tech readable) và implementation notes (dev only).
-
-```
-/design-detail
-/design-detail --scope frontend
-```
+Tạo mới thiết kế chi tiết API từ requirement và tài liệu scope. Hỗ trợ REST API (GET/POST/PUT/DELETE/PATCH). Hỏi xác nhận khi còn điểm chưa rõ trước khi finalize.
 
 | | |
 |--|--|
-| Input | 03-flow-design.md, 01-requirement-analysis.md |
-| Output | 08-detailed-design.md — index + linked detail files |
+| Workspace | document |
+| Input | File scope/requirement, tài liệu tham khảo |
+| Output | File thiết kế chi tiết API (.md) |
 
-**Tips**: File output là index. Chi tiết được tách ra file riêng theo component/module. KH đọc phần design, dev đọc phần impl notes.
+---
 
-## `/estimate`
+## `detail-design-api-edit`
 
-Breakdown công việc thành tasks, estimate giờ cho từng task, thêm risk buffer.
-
-```
-/estimate
-/estimate --buffer 20
-```
+Edit/update thiết kế chi tiết API đã có sẵn. Copy nội dung từ file .xlsx/.md cũ ra file .md mới, chỉnh sửa theo feedback. Hỏi xác nhận điểm chưa rõ trước khi finalize.
 
 | | |
 |--|--|
-| Input | 08-detailed-design.md, 01-requirement-analysis.md |
-| Output | 04-estimation.md — task list, hours, buffer, tổng |
+| Workspace | document |
+| Input | File design cũ (.xlsx hoặc .md) + nội dung cần sửa |
+| Output | File thiết kế chi tiết API mới (.md) |
 
-**Tips**: `--buffer` là % buffer thêm vào (mặc định 15%). Estimate theo unit = 0.5h.
+---
 
-## `/gen-design`
+## `detail-design-api-fixer`
 
-Tạo design document từ source code đã có (reverse engineering). Dùng khi nhận ticket cần sửa code không có thiết kế.
-
-```
-/gen-design --scope lib/scenes/booking
-/gen-design --file lib/scenes/booking/booking_view.dart
-```
+Fix review-feedback cho file thiết kế chi tiết API, cập nhật file gốc và ghi lại những gì đã sửa.
 
 | | |
 |--|--|
-| Input | Source code path |
-| Output | 08-detailed-design.md reverse engineered |
+| Workspace | document |
+| Input | File design gốc + danh sách feedback cần fix |
+| Output | File design đã cập nhật + changelog |
 
-**Tips**: Kết hợp với `/analyze-source` để xác định scope trước. Kết quả cần review thủ công.
+---
 
-## `/sync-design`
+## `detail-design-api-reviewer`
 
-Cập nhật `08-detailed-design.md` theo code thực tế sau khi `/cook` hoặc `/fix-bug` thay đổi implementation.
-
-```
-/sync-design
-/sync-design --scope api-contracts
-```
+Review thiết kế chi tiết API theo checklist, đảm bảo đầy đủ endpoint, request/response, validation, authorization, error handling, security. Tạo file báo cáo kết quả review.
 
 | | |
 |--|--|
-| Input | 08-detailed-design.md + source code hiện tại |
-| Output | 08-detailed-design.md cập nhật (in-place) |
+| Workspace | document |
+| Input | File thiết kế chi tiết API (.md hoặc .xlsx) |
+| Output | File báo cáo review kết quả |
 
-**Tips**: Chạy sau mỗi sprint hoặc trước khi delivery. Dùng `--scope` để giới hạn phần sync.
+---
 
-## `/propose`
+## `detail-design-screen-creator`
 
-Đề xuất phương án giải pháp cho khách hàng: so sánh các approach, estimate, risk, và POC nếu cần.
-
-```
-/propose "Xử lý offline sync cho booking"
-/propose --format slide
-```
+Tạo mới thiết kế chi tiết màn hình từ file scope yêu cầu. Hỗ trợ các loại màn hình: form, list, detail, modal. Hỏi xác nhận khi còn điểm chưa rõ trước khi finalize.
 
 | | |
 |--|--|
-| Input | Topic hoặc vấn đề cần đề xuất |
-| Output | Proposal document với comparison table, estimate, risk matrix |
+| Workspace | document |
+| Input | File scope/requirement màn hình |
+| Output | File thiết kế chi tiết màn hình (.md) |
 
-**Tips**: Dùng `--format slide` để xuất dạng presentation-friendly. Luôn có ít nhất 2 options để KH chọn.
+---
 
-## `/propose-fix`
+## `detail-design-screen-edit`
 
-Đề xuất fix strategy cho bug, bao gồm approval gate trước khi implement.
-
-```
-/propose-fix
-```
+Edit/update thiết kế chi tiết màn hình đã có sẵn. Copy nội dung từ file .xlsx/.md cũ ra file .md mới, chỉnh sửa theo feedback.
 
 | | |
 |--|--|
-| Input | analyze-bug output, ticket.md (bug) |
-| Output | Fix proposal với root cause, approach options, risk assessment |
+| Workspace | document |
+| Input | File design màn hình cũ + nội dung cần sửa |
+| Output | File thiết kế chi tiết màn hình mới (.md) |
 
-**Tips**: Skill này dừng lại và chờ approval trước khi chuyển sang `/fix-bug`. Không auto-implement.
+---
+
+## `detail-design-screen-reviewer`
+
+Review thiết kế chi tiết màn hình theo checklist chuyên biệt cho Screen, đảm bảo đầy đủ layout, field, chức năng, validation, integration. Tạo file báo cáo kết quả review.
+
+| | |
+|--|--|
+| Workspace | document |
+| Input | File thiết kế chi tiết màn hình (.md hoặc .xlsx) |
+| Output | File báo cáo review kết quả |
+
+---
+
+## `detail-design-task-creator`
+
+Tạo thiết kế chi tiết task/Lambda function từ file scope yêu cầu.
+
+| | |
+|--|--|
+| Workspace | document |
+| Input | File scope/requirement task |
+| Output | File thiết kế chi tiết task (.md) |
+
+---
+
+## `detail-design-task-fixer`
+
+Fix review-feedback cho file thiết kế chi tiết task, cập nhật file gốc và ghi lại những gì đã sửa.
+
+| | |
+|--|--|
+| Workspace | document |
+| Input | File design task gốc + danh sách feedback |
+| Output | File design đã cập nhật + changelog |
+
+---
+
+## `detail-design-task-reviewer`
+
+Review thiết kế chi tiết task theo checklist, đảm bảo đầy đủ hạ tầng Lambda, trigger, luồng xử lý, error handling, security. Tạo file báo cáo kết quả review.
+
+| | |
+|--|--|
+| Workspace | document |
+| Input | File thiết kế chi tiết task (.md hoặc .xlsx) |
+| Output | File báo cáo review kết quả |
+

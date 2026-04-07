@@ -1,146 +1,49 @@
 # Skills Kiểm thử (Testing)
 
-Nhóm skills hỗ trợ giai đoạn QA và kiểm thử (Phase B-10 → B-17).
+Nhóm skills tạo, fix, và review test cases kiểm thử chức năng (**document** workspace), và review UI trực quan (**econy-fe**).
 
-## `/create-testcase`
+## `testcase-functional-creator`
 
-Generate test cases theo 5 categories với traceability matrix liên kết về requirements.
-
-```
-/create-testcase
-/create-testcase --scope R01,R02
-```
+Tạo test cases kiểm thử đơn vị chức năng (Functional UT Test) từ tài liệu thiết kế. Sinh đầy đủ các loại: normal case, boundary, error case, security.
 
 | | |
 |--|--|
-| Input | 01-requirement-analysis.md, 08-detailed-design.md |
-| Output | 10-testcases.md — test cases có ID, category, steps, expected result |
+| Workspace | document |
+| Input | File thiết kế chi tiết API/Screen/Task (.md hoặc .xlsx) |
+| Output | File test cases (.md) |
 
-**5 categories:**
+---
 
-| Loại | Mô tả |
-|------|-------|
-| Normal | Happy path, luồng chính |
-| Boundary | Giá trị biên (min/max, empty, max length) |
-| Error | Input sai, network fail, server error |
-| Security | XSS, injection, auth bypass |
-| Offline | Hoạt động khi mất mạng, sync khi reconnect |
+## `testcase-functional-fixer`
 
-**Tips**: Mỗi test case có ID (TC-001) và liên kết về requirement ID (R01). Dùng `--scope` để giới hạn requirements.
-
-## `/review-testcase`
-
-Review coverage, edge cases, và traceability. Trả về APPROVED hoặc REJECTED kèm feedback.
-
-```
-/review-testcase
-```
+Fix review-feedback cho file test cases, cập nhật file gốc và ghi lại những gì đã sửa.
 
 | | |
 |--|--|
-| Input | 10-testcases.md, 01-requirement-analysis.md |
-| Output | Review report: APPROVED/REJECTED + danh sách gaps |
+| Workspace | document |
+| Input | File test cases gốc + danh sách feedback |
+| Output | File test cases đã cập nhật + changelog |
 
-**Tips**: Skill này là gate — không chuyển sang implement nếu REJECTED. Fix gaps rồi chạy lại.
+---
 
-## `/export-testcase`
+## `testcase-functional-reviewer`
 
-Parse markdown test cases → Excel `.xlsx` chuẩn.
-
-```
-/export-testcase
-/export-testcase --output deliverables/testcases.xlsx
-```
+Review test cases kiểm thử chức năng theo checklist, đảm bảo đầy đủ coverage, test case quality, environment setup, error cases, security. Tạo file báo cáo kết quả review.
 
 | | |
 |--|--|
-| Input | 10-testcases.md |
-| Output | .xlsx file với sheets theo category |
+| Workspace | document |
+| Input | File test cases (.md hoặc .xlsx) |
+| Output | File báo cáo review kết quả |
 
-**Tips**: Dùng trước khi gửi cho KH Nhật. Format tuân thủ conventions Nhật Bản.
+---
 
-## `/update-testcase`
+## `flutter-ui-review`
 
-Bổ sung test cases dựa trên impact report khi scope implementation mở rộng.
-
-```
-/update-testcase
-/update-testcase --impact 13-impact-report.md
-```
+So sánh UI thực tế với thiết kế (Figma/screenshot). Phát hiện sai lệch layout, màu sắc, font, spacing, behavior.
 
 | | |
 |--|--|
-| Input | 10-testcases.md, 13-impact-report.md |
-| Output | 10-testcases.md cập nhật với test cases mới (in-place) |
-
-**Tips**: Chạy sau `/impact-report` nếu có indirect impact areas chưa có test case.
-
-## `/test`
-
-Chạy full test suite, report kết quả.
-
-```
-/test
-/test --scope unit
-/test --watch
-```
-
-| | |
-|--|--|
-| Input | Source code, test files |
-| Output | Test results: pass/fail counts, coverage report |
-
-**Commands chạy:**
-
-```bash
-flutter test
-flutter test --coverage
-```
-
-**Tips**: Dùng `--watch` trong development. Dùng không có flag trước delivery để chạy full suite.
-
-## `/pre-sync-testcase`
-
-Tester sync trước khi test: fetch ticket, parse comment từ dev, checkout branch, đề xuất action tiếp theo.
-
-```
-/pre-sync-testcase ECONY-123
-```
-
-| | |
-|--|--|
-| Input | Ticket ID |
-| Output | Sync summary: branch checked out, test scope, suggested next step |
-
-**Tips**: Dùng khi tester bắt đầu session mới. Đảm bảo test đúng branch và đúng scope.
-
-## `/confirm-bugfix`
-
-Tester confirm bug fix: fetch bug ticket, checkout fix branch, phân tích scope fix, đề xuất retest plan.
-
-```
-/confirm-bugfix BUG-456
-```
-
-| | |
-|--|--|
-| Input | Bug ticket ID |
-| Output | Confirmation report: fix scope, retest checklist, regression risk |
-
-**Tips**: Chạy sau khi dev báo fix xong. Xác nhận đúng fix trước khi retest tránh lãng phí.
-
-## `/ui-review`
-
-So sánh UI screenshot với Figma design, phát hiện visual discrepancies.
-
-```
-/ui-review --screen BookingScreen
-/ui-review --url http://localhost:3000/booking --figma node-id
-```
-
-| | |
-|--|--|
-| Input | URL hoặc screen name + Figma node ID |
-| Output | Visual diff report với danh sách discrepancies và severity |
-
-**Tips**: Cần Playwright (chụp screenshot) và Figma MCP (lấy design). Phân loại discrepancy theo: layout, color, typography, spacing.
+| Workspace | econy-fe |
+| Input | Screenshot UI thực tế + file thiết kế / Figma |
+| Output | Báo cáo sai lệch UI với severity |

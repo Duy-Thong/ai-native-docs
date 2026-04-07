@@ -1,209 +1,112 @@
 # Skills Tiện ích (Utilities)
 
-Nhóm skills hỗ trợ orchestration, research, và các tác vụ phụ trợ.
+Nhóm skills phụ trợ: chuyển đổi tài liệu, trích xuất schema, đọc file lớn, xác minh, và quản lý skills.
 
-## `/pipeline`
+## `convert-excel-to-md`
 
-Auto workflow: tự detect ticket type → chọn sequence phù hợp → chạy từng bước → dừng tại approval gates.
-
-```
-/pipeline
-/pipeline --ticket ECONY-123
-/pipeline --from B-10
-```
+Chuyển đổi hàng loạt file Excel (.xlsx) sang định dạng Markdown tối ưu cho AI. Hỗ trợ ô merged, trích xuất hình ảnh, tiếng Việt và tiếng Nhật. Dùng trước khi cho AI đọc tài liệu nghiệp vụ Excel.
 
 | | |
 |--|--|
-| Input | Ticket ID hoặc context hiện tại |
-| Output | Chạy toàn bộ workflow, pause tại gates (review, approval) |
+| Workspace | econy-be / econy-fe |
+| Input | File .xlsx |
+| Output | File .md tương đương |
 
-**Tips**: Dùng `--from` để resume từ một phase cụ thể. Gates là: design review, testcase review, code review, delivery review.
+---
 
-## `/bug-pipeline`
+## `drawio-db-extract`
 
-Auto bug fix workflow: fetch → analyze → propose → (approval) → fix → test → review.
-
-```
-/bug-pipeline BUG-456
-/bug-pipeline BUG-456 --parent ECONY-123
-```
+Trích xuất định nghĩa bảng cơ sở dữ liệu từ file .drawio và tạo tài liệu markdown có cấu trúc. Hỗ trợ DynamoDB, Firestore, S3.
 
 | | |
 |--|--|
-| Input | Bug ticket ID |
-| Output | Fixed code, verified, ready for delivery |
+| Workspace | econy-be |
+| Input | File .drawio chứa sơ đồ database |
+| Output | File .md liệt kê tất cả bảng + schema |
 
-**Tips**: Dừng lại sau `/propose-fix` để chờ approval. Không tự ý implement khi chưa được approve.
+---
 
-## `/resume-ticket`
+## `drawio-firestore-extract`
 
-Resume ticket từ session trước: load artifacts đã tạo, build lại context, phát hiện bước tiếp theo cần làm.
-
-```
-/resume-ticket ECONY-123
-/resume-ticket --auto
-```
+Trích xuất định nghĩa collection Firestore từ file .drawio và tạo tài liệu markdown có cấu trúc.
 
 | | |
 |--|--|
-| Input | Ticket ID hoặc auto-detect từ working directory |
-| Output | Context summary + suggested next action |
+| Workspace | econy-be |
+| Input | File .drawio chứa sơ đồ Firestore |
+| Output | File .md liệt kê tất cả collection + schema |
 
-**Tips**: Dùng khi bắt đầu session mới sau khi đã làm dở. `--auto` tự tìm ticket đang in-progress.
+---
 
-## `/codebase-audit`
+## `read-file`
 
-Audit toàn diện codebase theo 5 dimensions: security, performance, architecture, tests, code quality.
-
-```
-/codebase-audit
-/codebase-audit --focus security
-/codebase-audit --scope lib/scenes/
-```
+Đọc file Markdown lớn (>200 dòng) mà không mất ngữ cảnh. Chia chunk với overlap, xây dựng bản đồ section, xác minh tính đầy đủ. Dùng trước `nodejs-code-from-design` hoặc `nodejs-design-review` khi spec lớn.
 
 | | |
 |--|--|
-| Input | Codebase path |
-| Output | Audit report với findings, severity, recommendations |
+| Workspace | econy-be |
+| Input | File .md lớn cần đọc |
+| Output | Nội dung đầy đủ với bản đồ section |
 
-**5 Dimensions:**
+---
 
-| Dimension | Nội dung |
-|-----------|---------|
-| Security | Vulnerabilities, exposed secrets, auth issues |
-| Performance | Bottlenecks, unnecessary rebuilds, memory leaks |
-| Architecture | Coupling, cohesion, Clean Architecture violations |
-| Tests | Coverage gaps, flaky tests, missing edge cases |
-| Quality | Dead code, complexity, duplication |
+## `verification-before-completion`
 
-## `/brainstorm`
-
-Thảo luận ý tưởng tự do, đề xuất approaches, explore trade-offs trước khi commit vào một direction.
-
-```
-/brainstorm "Cách tốt nhất để handle offline sync?"
-/brainstorm --topic "Architecture cho multi-tenant"
-```
+Bắt buộc tuyên bố hoàn thành dựa trên bằng chứng thực tế. Chạy lệnh xác minh và xác nhận output trước khi tuyên bố công việc đã hoàn thành, đã sửa, hoặc đã pass.
 
 | | |
 |--|--|
-| Input | Topic hoặc câu hỏi |
-| Output | Structured discussion với pros/cons, recommendations |
+| Workspace | econy-be / econy-fe |
+| Trigger | Trước `git commit`, `git push`, tạo PR, báo cáo "done" |
+| Output | Kết quả xác minh thực tế (test results, lint output...) |
 
-## `/research`
+**Tips**: Không tuyên bố "đã xong" nếu chưa chạy lệnh xác minh và thấy output pass.
 
-Nghiên cứu kỹ thuật chuyên sâu: tìm solutions, so sánh libraries, đọc docs, phân tích trade-offs.
+---
 
-```
-/research "Mobx vs Provider cho state management"
-/research --depth deep "Firebase Firestore offline caching"
-```
+## `skill-creator`
 
-| | |
-|--|--|
-| Input | Research topic |
-| Output | Research report trong plans/reports/ |
-
-**Tips**: Dùng `--depth deep` cho quyết định kiến trúc quan trọng. Output lưu vào reports để tham khảo sau.
-
-## `/scout`
-
-Khám phá codebase nhanh: tìm files theo pattern, locate implementations, map dependencies.
-
-```
-/scout "authentication"
-/scout --pattern "*.store.dart"
-/scout --find "BookingViewModel"
-```
+Tạo skill mới, chỉnh sửa và cải thiện skill hiện có, đo hiệu suất skill bằng eval/benchmark, tối ưu description để kích hoạt chính xác hơn.
 
 | | |
 |--|--|
-| Input | Search term, pattern, hoặc class/function name |
-| Output | File list với relevant snippets và context |
+| Workspace | econy-be |
+| Input | Yêu cầu tạo/sửa/benchmark skill |
+| Output | File SKILL.md mới hoặc đã cập nhật |
 
-**Tips**: Dùng trước `/analyze-source` để xác định scope. Nhanh hơn đọc toàn bộ codebase.
+---
 
-## `/preview`
+## `translate-document`
 
-Tạo visual output: diagrams, slides, code explanation với Mermaid và ASCII art.
-
-```
-/preview --diagram "Auth flow"
-/preview --explain lib/scenes/booking/booking_view.dart
-/preview --slides "Deployment process"
-```
+Dịch tài liệu (Excel .xlsx, Word .docx, PowerPoint .pptx) từ JP↔VN mà không cần API ngoài — agent tự dịch toàn bộ nội dung. Hỗ trợ optional rules file (Markdown).
 
 | | |
 |--|--|
-| Input | Topic, file path, hoặc description |
-| Output | Visual markdown (Mermaid) hoặc HTML file |
+| Workspace | econy-fe |
+| Input | File cần dịch + hướng dịch (JP→VN hoặc VN→JP) |
+| Output | File đã dịch cùng định dạng |
 
-## `/think`
+---
 
-Phân tích step-by-step có hệ thống: break down problem, list assumptions, reason through solution.
+## `xlsx`
 
-```
-/think "Tại sao booking fail khi offline?"
-/think --verbose "Impact của việc đổi auth strategy"
-```
+Mở, đọc, sửa, tạo file .xlsx/.csv/.tsv. Dùng khi file spreadsheet là input hoặc output chính: thêm cột, tính formula, format, clean messy data, convert giữa các format bảng.
 
 | | |
 |--|--|
-| Input | Problem hoặc question |
-| Output | Structured reasoning với numbered steps, conclusion |
+| Workspace | econy-fe |
+| Input | File .xlsx/.csv hoặc yêu cầu tạo mới |
+| Output | File spreadsheet đã xử lý |
 
-**Tips**: Dùng cho vấn đề phức tạp trước khi debug hoặc thiết kế. Kết hợp với `/debug` cho production issues.
+---
 
-## `/update-knowledge`
+## `clean-code`
 
-Cập nhật knowledge base từ findings trong session: lưu patterns, decisions, lessons learned.
-
-```
-/update-knowledge
-/update-knowledge --finding "TenantContext phải init trước mọi API call"
-```
+Áp dụng các nguyên tắc từ "Clean Code" (Robert C. Martin) khi viết, review, hoặc refactor code. Covers: naming, functions, comments, formatting, error handling, testing.
 
 | | |
 |--|--|
-| Input | Finding text hoặc auto-extract từ session |
-| Output | Knowledge base updated |
+| Workspace | econy-fe |
+| Input | Code cần review hoặc refactor |
+| Output | Code đã cải thiện + giải thích vi phạm |
 
-## `/done`
-
-Flush cost log, show session summary per ticket, rồi exit. Team habit: dùng `/done` thay vì thoát thẳng để đảm bảo log đầy đủ.
-
-```
-/done
-```
-
-| | |
-|--|--|
-| Input | Session state, log files |
-| Output | Session summary (turns, duration, per-ticket breakdown) → exit |
-
-**Summary bao gồm:**
-
-| Field | Nội dung |
-|-------|---------|
-| Total Turns | Số turn trong session |
-| Total Duration | Tổng thời gian |
-| Per Ticket | Breakdown turns + duration theo từng ticket |
-| Turn Log | Chi tiết từng turn: duration, ticket, skill |
-
-**Tips**: Luôn kết thúc session bằng `/done`.
-
-## `/convert-excel-to-md`
-
-Chuyển đổi Excel sang Markdown: xử lý merged cells, images, nội dung tiếng Việt và Nhật.
-
-```
-/convert-excel-to-md requirements.xlsx
-/convert-excel-to-md --sheet "TestCases" input.xlsx
-```
-
-| | |
-|--|--|
-| Input | .xlsx file path |
-| Output | Markdown file với tables, images extracted |
-
-**Tips**: Dùng `--sheet` để chỉ convert 1 sheet cụ thể. Merged cells được tự động unmerge và điền giá trị.

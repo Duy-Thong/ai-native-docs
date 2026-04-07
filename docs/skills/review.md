@@ -1,163 +1,87 @@
 # Skills Review
 
-Nhóm skills đảm bảo chất lượng qua các review gates (Phase B-9 → B-19).
+Nhóm skills review code MR, so sánh code với spec, và phản hồi AI review comments cho **econy-be** (Node.js) và **econy-fe** (Flutter).
 
-## `/review-code-skill`
+## econy-be (Node.js / AWS Lambda)
 
-Review code theo Security/OWASP, correctness, performance. Phát hiện blast radius và edge cases.
+## `nodejs-code-review`
 
-```
-/review-code-skill
-/review-code-skill --scope lib/scenes/booking
-/review-code-skill --focus security
-```
+Review code có hệ thống cho dự án Node.js/Express econy-be. Hỗ trợ 2 chế độ: so sánh branch (source vs target) và review commit (theo SHA). Review từng diff với truy vết 3 chiều + checklist đặc thù dự án. Không dùng cho phát triển tính năng, debug, viết mô tả MR.
 
 | | |
 |--|--|
-| Input | Source code, 08-detailed-design.md |
-| Output | Review report: issues theo severity (Critical/Major/Minor), fix suggestions |
+| Workspace | econy-be |
+| Input | Branch source + target, hoặc commit SHA |
+| Output | `reports/code-review-*.md` |
 
-**Checklist tự động:**
+**Checklist:**
 
 | Category | Nội dung |
 |----------|---------|
-| Security | OWASP Top 10, injection, auth |
+| Critical rules | customJoi / Logger / catchAsync / OrgId từ env.js / APIResponse pattern |
+| Security | OWASP Top 10, injection, auth bypass |
 | Correctness | Logic, edge cases, null handling |
-| Performance | Unnecessary rebuilds, memory leaks |
-| Architecture | Clean Architecture violations, layer dependencies |
+| Performance | N+1 queries, unnecessary loops |
 
-**Tips**: Critical issues = blocking. Major = cần fix trước delivery. Minor = nice-to-have.
+---
 
-## `/review-design`
+## `nodejs-design-review`
 
-Verify tính đầy đủ, khả thi, và nhất quán của design. Trả về APPROVED hoặc REJECTED.
-
-```
-/review-design
-/review-design --focus api-contracts
-```
+So sánh triển khai API với thiết kế spec (.md hoặc .xlsx) cho econy-be. Xác minh endpoint, trường dữ liệu, auth, trường hợp lỗi khớp với spec. Hỗ trợ Markdown và Excel. Không dùng cho review code chung, triển khai code, debug.
 
 | | |
 |--|--|
-| Input | 08-detailed-design.md, 01-requirement-analysis.md |
-| Output | Review report: APPROVED/REJECTED + gaps list |
+| Workspace | econy-be |
+| Input | Source code + file spec thiết kế (.md hoặc .xlsx) |
+| Output | `reports/design-review-*.md` |
 
-**Tips**: Gate bắt buộc trước khi bắt đầu implement. REJECTED = phải update design và review lại.
+---
 
-## `/review-testcase`
+## `nodejs-review-reply`
 
-Check coverage và traceability của test cases. Đảm bảo mọi requirement đều có test.
-
-```
-/review-testcase
-```
+Xác minh các comment review MR do AI tạo cho econy-be. Đọc code thực tế, đánh giá từng comment là đúng hay sai, tạo phản hồi chấp nhận (kèm sửa lỗi) hoặc từ chối (kèm phản biện kỹ thuật).
 
 | | |
 |--|--|
-| Input | 10-testcases.md, 01-requirement-analysis.md |
-| Output | Review report: APPROVED/REJECTED, coverage matrix, missing cases |
+| Workspace | econy-be |
+| Input | File report review MR (`reports/code-review-*.md`) |
+| Output | `reports/reply-comment-*.md` |
 
-## `/review-delivery`
+---
 
-Review cuối cùng trước delivery: kiểm tra 4C — Correctness, Completeness, Consistency, Compliance. Quyết định GO/NO-GO.
+## econy-fe (Flutter / Dart)
 
-```
-/review-delivery
-/review-delivery --checklist custom-checklist.md
-```
+## `flutter-mr-review`
 
-| | |
-|--|--|
-| Input | Toàn bộ artifacts: ticket, design, code, test results |
-| Output | Delivery report: GO/NO-GO + checklist kết quả |
-
-**4C Checklist:**
-
-| | Ý nghĩa |
-|--|---------|
-| Correctness | Code đúng với requirements |
-| Completeness | Tất cả requirements được implement |
-| Consistency | Code khớp với design |
-| Compliance | Tuân thủ coding standards, security policy |
-
-## `/review-mr`
-
-Review GitLab Merge Request: đọc diff, so sánh với design, phân loại shiteki (指摘) theo mức A~J.
-
-```
-/review-mr --mr 42
-/review-mr --url https://gitlab.nri-dx.com/org/repo/-/merge_requests/42
-```
+Review MR Flutter cho econy-fe. Phân tích git diff, kiểm tra Clean Architecture violations, TenantContext usage, i18n, null safety, error handling.
 
 | | |
 |--|--|
-| Input | MR number hoặc URL |
-| Output | Review comment list với phân loại shiteki, severity, file/line references |
+| Workspace | econy-fe |
+| Input | Branch source + target, hoặc MR number |
+| Output | `reports/code-review-*.md` |
 
-**Tips**: Kết hợp với `/shiteki` để track và resolve từng comment.
+---
 
-## `/shiteki`
+## `flutter-design-review`
 
-Quản lý chỉ trích (指摘) từ review: ghi nhận, phân loại (A~J), root cause, đề xuất fix.
-
-```
-/shiteki add "Thiếu null check ở line 42"
-/shiteki list
-/shiteki resolve S-001
-```
+So sánh triển khai Flutter với spec thiết kế màn hình. Xác minh layout, fields, behavior, validation, error handling khớp với spec.
 
 | | |
 |--|--|
-| Input | Review comments hoặc shiteki ID |
-| Output | Shiteki registry: ID, category, status, fix suggestion |
+| Workspace | econy-fe |
+| Input | Source code + file thiết kế chi tiết màn hình |
+| Output | `reports/design-review-*.md` |
 
-**Phân loại A~J**: A = Critical bug, B = Logic error, C = Security, D = Performance, E = Style, F = Documentation, G = Test, H = Design inconsistency, I = Naming, J = Other.
+---
 
-## `/multi-model-review`
+## `flutter-review-reply`
 
-Chạy review song song bằng nhiều AI model, tổng hợp findings.
-
-```
-/multi-model-review
-/multi-model-review --scope lib/domain/usecases/
-```
+Xác minh và phản hồi AI review comments cho Flutter econy-fe. Đọc code thực tế, chấp nhận comment đúng (kèm fix) hoặc từ chối (kèm phản biện kỹ thuật).
 
 | | |
 |--|--|
-| Input | Source code path |
-| Output | Merged review report: multi-model findings validated |
+| Workspace | econy-fe |
+| Input | File report review MR (`reports/code-review-*.md`) |
+| Output | `reports/reply-comment-*.md` |
 
-**Tips**: Dùng cho critical modules. Kết quả được validate và deduplicate.
-
-## `/analysis-shiteki`
-
-Phân tích shiteki toàn sprint cho leader: thống kê, trends, critical pending. Incremental — chỉ đọc entries mới so với report trước.
-
-```
-/analysis-shiteki
-/analysis-shiteki --sprint S10
-/analysis-shiteki --date 260401
-```
-
-| | |
-|--|--|
-| Input | Shiteki entries trong plans/Sprint-XX/*/shiteki/ |
-| Output | Daily report: plans/Sprint-XX/analysis/shiteki/{YYMMDD}-daily-report.md |
-
-**Tips**: Dùng `--date` để xem report cũ (read-only). Chạy hằng ngày để track progress shiteki.
-
-## `/verify-report`
-
-Cross-validate tính đầy đủ và độ chính xác của report: kiểm tra data consistency, conclusions có evidence không.
-
-```
-/verify-report plans/reports/researcher-report.md
-/verify-report --all plans/reports/
-```
-
-| | |
-|--|--|
-| Input | Report file path |
-| Output | Verification result: verified/issues found + specific discrepancies |
-
-**Tips**: Dùng trước khi gửi report cho KH hoặc trước delivery review.
