@@ -92,21 +92,16 @@ export default defineConfig({
     ],
     socialLinks: [],
     search: { provider: 'local' },
-    editLink: {
-      pattern: 'https://github.com/your-org/econy-docs/edit/main/docs/:path',
-      text: 'Chỉnh sửa trang này',
-    },
+
     footer: {
       message: 'AI Native Workflow — Econy Project',
       copyright: 'Copyright © 2026',
     },
     outline: { label: 'Trên trang này' },
     docFooter: { prev: 'Trang trước', next: 'Trang sau' },
-    lastUpdated: { text: 'Cập nhật lần cuối' },
     returnToTopLabel: 'Về đầu trang',
     sidebarMenuLabel: 'Menu',
     darkModeSwitchLabel: 'Giao diện',
   },
-  lastUpdated: true,
   markdown: { theme: { light: 'github-light', dark: 'github-dark' } },
 })

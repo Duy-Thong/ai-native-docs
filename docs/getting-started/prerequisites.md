@@ -26,26 +26,26 @@ dart --version
 git --version
 ```
 
-### Công cụ bổ sung
+### glab CLI
 
 ```bash
 # glab CLI để tương tác với GitLab
 glab --version
 ```
 
-## Tùy chọn
+### Node.js
 
-Các tích hợp sau mở khóa thêm tính năng:
+Cần có Node.js để chạy các MCP server:
 
-| API Key | Tính năng | Skills |
-|---------|-----------|--------|
-| FIGMA_API_KEY | Đọc Figma design files | flutter-ui-review |
-| GITLAB_TOKEN | Tương tác GitLab | MR operations |
+```bash
+node --version  # cần >= 18.x
+npx --version
+```
 
 ## Kiểm tra nhanh
 
 ```bash
-flutter --version && git --version && glab --version
+flutter --version && git --version && glab --version && node --version
 ```
 
 Tất cả output xuất hiện mà không có lỗi là môi trường đã sẵn sàng.

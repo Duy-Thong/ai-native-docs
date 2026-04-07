@@ -1,69 +1,40 @@
 # Cấu hình môi trường
 
-## Bước 1: Tạo file `.env`
+## Setup dự án
 
-```bash
-cp .env.example .env
-```
+Chi tiết cấu hình môi trường từng repo (Flutter, backend, biến môi trường, v.v.) xem trên **GitLab Wiki** của từng repo tương ứng.
 
-## Biến môi trường bắt buộc
+---
 
-| Biến | Mô tả | Ví dụ |
-|------|-------|-------|
-| CURRENT_SPRINT | Sprint hiện tại — cập nhật đầu mỗi sprint | Sprint-24 |
-| REPORTER_NAME | Tên của bạn — dùng trong review, MR | Nguyen Van A |
+## MCP Servers
 
-```dotenv
-CURRENT_SPRINT=Sprint-24
-REPORTER_NAME=Nguyen Van A
-```
-
-> **Quan trọng**: `CURRENT_SPRINT` dùng để tổ chức artifacts theo sprint.
-
-## API keys tùy chọn
-
-```dotenv
-# Đọc Figma design files
-FIGMA_API_KEY=your-key-here
-
-# GitLab token
-GITLAB_TOKEN=your-token-here
-```
-
-## MCP Servers (VS Code)
-
-Cấu hình trong VS Code settings (`settings.json`):
+Agent hiện dùng 2 MCP server: **Figma**, **Playwright**. Cấu hình bằng cách tạo (hoặc mở) file `.vscode/mcp.json` trong workspace:
 
 ```json
 {
-  "github.copilot.chat.codeGeneration.instructions": [],
-  "mcp": {
-    "servers": {
-      "figma": {
-        "command": "npx",
-        "args": ["-y", "figma-mcp"],
-        "env": { "FIGMA_ACCESS_TOKEN": "${FIGMA_API_KEY}" }
-      },
-      "playwright": {
-        "command": "npx",
-        "args": ["-y", "@playwright/mcp"]
-      }
-    }
+  "servers": {
+    "figma": {
+      "url": "https://mcp.figma.com/mcp",
+      "type": "http"
+    },
+    "microsoft/playwright-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
   }
 }
 ```
 
 | Server | Tính năng |
 |--------|-----------|
-| figma | Đọc Figma design files trong flutter-ui-review |
-| playwright | Browser automation cho UI test |
+| `figma` | Đọc Figma design files (HTTP, không cần cài thêm) |
+| `playwright` | Browser automation — test UI, chụp màn hình |
 
-## Xác nhận cấu hình
+> **Lưu ý Figma**: Server Figma dùng HTTP transport, cần đăng nhập Figma account trong VS Code khi được yêu cầu.
 
-Mở VS Code và thực hiện một skill test:
+## Xác nhận MCP
 
-```
-#flutter-dev dự án này đang dùng Flutter version bao nhiêu?
-```
-
-Nếu Copilot trả lời đúng thông tin từ `pubspec.yaml` là cấu hình thành công.
+Sau khi lưu file, mở VS Code Command Palette (`Ctrl+Shift+P`) → **MCP: List Servers** để xác nhận 2 server đã kết nối.

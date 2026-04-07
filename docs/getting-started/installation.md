@@ -1,48 +1,71 @@
 # Cài đặt
 
-Hướng dẫn từng bước clone và thiết lập workspace AI Native Workflow cho Econy.
+Hướng dẫn clone 3 repo của Econy và thiết lập VS Code Workspace để nhận toàn bộ agent & skill từ cả 3 repo.
 
-## Bước 1: Clone econy-fe repo
+## Bước 1: Clone 3 repo
 
-```bash
-git clone <econy-fe-repo-url>
-cd econy-fe
-```
-
-## Bước 2: Cấu trúc thư mục
-
-Sau khi clone, workspace có cấu trúc:
-
-```
-econy-fe/
-├── .github/               # AI workflow config
-│   ├── copilot-instructions.md   # Iron Rules
-│   ├── agents/            # flutter-dev, flutter-reviewer
-│   ├── instructions/      # flutter-dart.instructions.md
-│   └── skills/            # 13 skills
-├── lib/                   # Flutter source code
-│   ├── domain/            # entities, usecase
-│   ├── data/              # api, models, repositories
-│   └── scenes/            # presentation
-└── test/                  # unit tests
-```
-
-## Bước 3: Cài đặt Flutter dependencies
+Mỗi repo có thư mục `.github/` riêng chứa agents, skills, và instructions.
 
 ```bash
-flutter pub get
+git clone <econy-fe-url>
+git clone <econy-be-url>
+git clone <econy-document-url>
 ```
 
-## Bước 4: Cấu hình môi trường
+| Repo | Nội dung `.github/` |
+|------|---------------------|
+| `econy-fe` | Flutter agents, skills, instructions |
+| `econy-be` | Backend agents, skills, instructions |
+| `econy-document` | Doc agents, workflow skills |
 
-Tạo file `.env` với các biến cần thiết (xem [Cấu hình môi trường](./configuration)).
+## Bước 2: Tạo VS Code Workspace
 
-## Bước 5: Xác nhận cài đặt
-
-Mở VS Code với GitHub Copilot. Kiểm tra skills đã available bằng cách chat với Copilot:
+Tạo file `econy.code-workspace` ở thư mục cha (ngang cấp với 3 repo):
 
 ```
-#flutter-dev Bạn có những skills gì?
+parent-folder/
+├── econy-fe/
+├── econy-be/
+├── econy-document/
+└── econy.code-workspace   ← tạo file này
 ```
 
-Nếu Copilot trả lời danh sách skills là cài đặt thành công.
+Nội dung file `econy.code-workspace`:
+
+```json
+{
+  "folders": [
+    {
+      "name": "econy-fe",
+      "path": "./econy-fe"
+    },
+    {
+      "name": "econy-be",
+      "path": "./econy-be"
+    },
+    {
+      "name": "econy-document",
+      "path": "./econy-document"
+    }
+  ],
+  "settings": {}
+}
+```
+
+## Bước 3: Mở Workspace
+
+```bash
+code econy.code-workspace
+```
+
+Hoặc trong VS Code: **File → Open Workspace from File...** → chọn `econy.code-workspace`.
+
+## Bước 4: Xác nhận
+
+Khi workspace mở, GitHub Copilot sẽ tự động nhận agents & skills từ `.github/` của cả 3 repo. Kiểm tra bằng cách chat:
+
+```
+@workspace Bạn có những agents gì?
+```
+
+Nếu Copilot liệt kê được agents từ cả 3 repo là thiết lập thành công.
